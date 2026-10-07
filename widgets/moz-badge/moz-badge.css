@@ -1,0 +1,33 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+:host {
+  --badge-border-color: var(--border-color);
+  --badge-text-color: var(--text-color-deemphasized);
+  --badge-padding-block: var(--space-xsmall);
+  --badge-padding-inline: var(--space-small);
+
+  display: contents;
+}
+
+.moz-badge {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xsmall);
+  padding: var(--badge-padding-block) var(--badge-padding-inline);
+  width: fit-content;
+  color: var(--badge-text-color);
+  border: 1px solid var(--badge-border-color);
+  border-radius: var(--border-radius-small);
+}
+
+.moz-badge-icon {
+  width: var(--icon-size-xsmall);
+  height: var(--icon-size-xsmall);
+  color: var(--icon-color);
+}
+
+.moz-badge-label {
+  font-size: var(--font-size-small);
+}

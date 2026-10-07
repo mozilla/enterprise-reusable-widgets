@@ -1,0 +1,56 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+:host {
+  --input-color-min-height: var(--button-min-height);
+  --input-color-border-color: var(--border-color-interactive);
+  --input-color-border-color-disabled: var(--border-color-interactive-disabled);
+  --input-color-border: var(--border-width) solid
+    var(--input-color-border-color);
+  --input-color-border-radius: var(--button-border-radius);
+  --input-color-background-color: Field;
+  --input-color-background-color-disabled: var(
+    --button-background-color-disabled
+  );
+  --input-color-opacity-disabled: var(--button-opacity-disabled);
+}
+
+#input {
+  width: 100%;
+  max-width: var(--input-color-max-width);
+  min-height: var(--input-color-min-height);
+  padding: var(--space-xxsmall);
+  border: var(--input-color-border);
+  border-radius: var(--input-color-border-radius);
+  box-sizing: border-box;
+  background-color: var(--input-color-background-color);
+  cursor: pointer;
+
+  &:disabled {
+    border-color: var(--input-color-border-color-disabled);
+    background-color: var(--input-color-background-color-disabled);
+    opacity: var(--input-color-opacity-disabled);
+    cursor: default;
+  }
+
+  &::-moz-color-swatch {
+    border: none;
+    border-radius: calc(
+      var(--input-color-border-radius) - var(--space-xxsmall)
+    );
+  }
+
+  /* This rule needs to stay separate from the previous one, otherwise Chrome
+   * just silently drops the rule. */
+  &::-webkit-color-swatch {
+    border: none;
+    border-radius: calc(
+      var(--input-color-border-radius) - var(--space-xxsmall)
+    );
+  }
+
+  &::-webkit-color-swatch-wrapper {
+    padding: 0;
+  }
+}

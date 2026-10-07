@@ -1,0 +1,79 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+:host {
+  display: contents;
+}
+
+/* The min-height is the button height less the track's inset on each side,
+   which keeps the track's outer box exactly one button tall. */
+.segment {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xsmall);
+  appearance: none;
+  border: none;
+  box-sizing: border-box;
+  min-height: calc(
+    var(--button-min-height) - 2 * var(--segmented-control-inset)
+  );
+  padding-inline: var(--space-large);
+  border-radius: var(--border-radius-small);
+  background: transparent;
+  color: var(--button-text-color);
+  font-family: inherit;
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-bold);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  @media (prefers-reduced-motion) {
+    transition: none;
+  }
+}
+
+/* The focused segment carries the ring; it fits inside the track's inset. */
+.segment:focus-visible {
+  outline: var(--focus-outline);
+}
+
+/* The selected segment is filled by the control's sliding thumb, so hover must
+   not paint over it — that would hide the movement. */
+.segment:hover:not(:disabled):not([aria-checked="true"]) {
+  background: var(--button-background-color-hover);
+  color: var(--button-text-color-hover);
+}
+
+.segment:active:hover:not(:disabled):not([aria-checked="true"]) {
+  background: var(--button-background-color-active);
+  color: var(--button-text-color-active);
+}
+
+.segment:disabled {
+  color: var(--text-color-disabled);
+  cursor: default;
+}
+
+.icon {
+  width: var(--icon-size);
+  height: var(--icon-size);
+}
+
+@media (forced-colors) {
+  .segment[aria-checked="true"] {
+    color: var(--button-background-color);
+    background: var(--button-text-color);
+  }
+
+  .segment:not([aria-checked="true"]) {
+    color: var(--button-text-color);
+  }
+
+  .segment:hover:not(:disabled):not([aria-checked="true"]) {
+    background: var(--button-background-color-hover);
+    color: var(--button-text-color-hover);
+  }
+}

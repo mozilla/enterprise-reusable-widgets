@@ -1,0 +1,84 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+:host {
+  display: inline-block;
+  --segmented-control-inset: var(--space-xxsmall);
+}
+
+:host(:dir(rtl)) .thumb {
+  translate: calc(var(--selected-index) * -100%);
+}
+
+:host([disabled]) .track {
+  opacity: 0.4;
+}
+
+.label {
+  display: block;
+  margin-block-end: var(--space-xsmall);
+  font-weight: var(--font-weight-bold);
+}
+
+.description {
+  display: block;
+  margin-block-start: var(--space-xsmall);
+  color: var(--text-color-deemphasized);
+  font-size: var(--font-size-small);
+}
+
+.track {
+  position: relative;
+  display: inline-block;
+  padding: var(--segmented-control-inset);
+  border-radius: calc(var(--border-radius-small) + var(--space-xxsmall));
+  background-color: var(--button-background-color-ghost-active);
+}
+
+.segments {
+  position: relative;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+}
+
+.thumb {
+  position: absolute;
+  inset-block: var(--segmented-control-inset);
+  inset-inline-start: var(--segmented-control-inset);
+  width: calc(
+    (100% - 2 * var(--segmented-control-inset)) / var(--segment-count)
+  );
+  border-radius: var(--border-radius-small);
+  background-color: var(--background-color-box);
+  translate: calc(var(--selected-index) * 100%);
+}
+
+@media (prefers-contrast) {
+  .track {
+    background-color: var(--border-color);
+  }
+
+  .thumb {
+    border: var(--border-width) solid var(--border-color-interactive);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .thumb {
+    transition: translate 100ms;
+  }
+}
+
+@media (forced-colors) {
+  .track {
+    border: 1px solid var(--border-color-interactive);
+  }
+
+  /* The thumb's fill is dropped in forced colours, so the segment's own
+     border marks the selection instead. */
+  .thumb {
+    display: none;
+  }
+}
